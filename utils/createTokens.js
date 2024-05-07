@@ -73,9 +73,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 		await user.save({ validateBeforeSave: false });
 		return { accessToken, refreshToken };
 	} catch (error) {
-		res.status(500).json({
-			message: 'Something went wrong while generating the access token',
-		});
+		throw new Error('Something went wrong while generating the access token');
 	}
 };
 
