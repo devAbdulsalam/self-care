@@ -63,7 +63,7 @@ export const generateTemporaryToken = function () {
 const generateAccessAndRefreshTokens = async (userId) => {
 	try {
 		const user = await User.findById(userId);
-
+		console.log(user);
 		const accessToken = generateAccessToken(user);
 		const refreshToken = generateRefreshToken(user);
 
@@ -71,8 +71,10 @@ const generateAccessAndRefreshTokens = async (userId) => {
 		user.refreshToken = refreshToken;
 
 		await user.save({ validateBeforeSave: false });
+		console.log({ accessToken, refreshToken });
 		return { accessToken, refreshToken };
 	} catch (error) {
+		console.log(error);
 		throw new Error('Something went wrong while generating the access token');
 	}
 };
